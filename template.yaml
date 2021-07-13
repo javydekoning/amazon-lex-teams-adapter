@@ -1,0 +1,97 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template for sam-lex
+
+Parameters:
+  LexBotName:
+    Type: String
+    Description: Name of the Amazon Lex bot for Teams to integrate with
+    Default: help_desk_bot
+  LexBotAlias:
+    Type: String
+    Default: "dev"
+  MSAppId:
+    Type: String
+    Default: xxx
+    NoEcho: true
+    Description: The App ID from Step 2 (Refer to Readme)
+  MSAppClientSecret:
+    Type: String
+    Default: xxx
+    NoEcho: true
+    Description: The Client Secret from Step 2 (Refer to Readme)
+  MSTenantID:
+    Type: String
+    Default: xxx
+    NoEcho: true
+    Description: |
+      Sign in to the Azure portal. Select Azure Active Directory. 
+      Select Properties. Then, scroll down to the Tenant ID field. 
+      Your tenant ID will be in the box.
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  LexAdapter:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Environment:
+        Variables:
+          ENV: !Ref LexBotAlias
+          LEX_BOT_NAME: !Ref LexBotName
+          LEX_BOT_ALIAS: !Ref LexBotAlias
+          CONFIG: !Ref LexTeamsAdapterConfig
+      CodeUri: app/
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      Events:
+        PutResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+      Policies:
+        - Statement:
+            - Sid: GetConfig
+              Effect: Allow
+              Action:
+                - secretsmanager:GetResourcePolicy
+                - secretsmanager:GetSecretValue
+                - secretsmanager:DescribeSecret
+                - secretsmanager:ListSecretVersionIds
+                - secretsmanager:ListSecrets
+              Resource: [!Ref LexTeamsAdapterConfig]
+            - Sid: CallLex
+              Effect: Allow
+              Action:
+                - lex:PostText
+                - lex:GetSession
+                - lex:PutSession
+                - lex:DeleteSession
+              Resource:
+                [
+                  !Sub "arn:aws:lex:${AWS::Region}:${AWS::AccountId}:bot:${LexBotName}:*",
+                ]
+
+  LexTeamsAdapterConfig:
+    Type: "AWS::SecretsManager::Secret"
+    Properties:
+      Name: LexTeamsAdapterConfig
+      Description: Secrets for Lex Teams adapter
+      SecretString: !Sub >
+        {
+          "ms_app_id": "${MSAppId}",
+          "client_secret":"${MSAppClientSecret}",
+          "valid_tenant_ids":"${MSTenantID}"
+        }
+
+Outputs:
+  LexAdapterApi:
+    Description: "API Gateway endpoint URL for LexAdapter"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/chatops"
+  LexFunction:
+    Description: "LexAdapter Function ARN"
+    Value: !GetAtt LexAdapter.Arn

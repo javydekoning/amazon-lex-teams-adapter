@@ -1,0 +1,63 @@
+{
+  "body": "{\"text\":\"hi\",\"textFormat\":\"plain\",\"type\":\"message\",\"timestamp\":\"2021-05-27T14:47:47.5890235Z\",\"localTimestamp\":\"2021-05-27T16:47:47.5890235+02:00\",\"id\":\"1622126867574\",\"channelId\":\"msteams\",\"serviceUrl\":\"https://smba.trafficmanager.net/emea/\",\"from\":{\"id\":\"29:1A59E7TM_4br_jXGQHfN-KysWfM7racdYe2VWt3Nbp9bg9l3dC6HRWbxeawy436lvNVoGL9dPNvQwlER6m9ayWg\",\"name\":\"Javy Koning\",\"aadObjectId\":\"7cb033ad-cacf-4555-ab75-98013016b869\"},\"conversation\":{\"conversationType\":\"personal\",\"tenantId\":\"x\",\"id\":\"a:1x0IOMbZYWy8F5W7OvVaLQeEib_eEc3UsUKmX5y7WW16nlyICNCzpAt5TEb0F-mSx-SkIX2_jVowi3FS_ETW81sIvQZiomr_IrL14OlKEpJqnk-_3qqPcdQhJEw1nLU-k\"},\"recipient\":{\"id\":\"28:c829e6f5-06b0-40aa-8267-aecf44ad2e0e\",\"name\":\"lexbot\"},\"entities\":[{\"locale\":\"en-GB\",\"country\":\"GB\",\"platform\":\"Mac\",\"timezone\":\"Europe/Amsterdam\",\"type\":\"clientInfo\"}],\"channelData\":{\"tenant\":{\"id\":\"6648010b-29b8-479f-a4cb-8404746ed35c\"}},\"locale\":\"en-GB\",\"localTimezone\":\"Europe/Amsterdam\"}",
+  "resource": "/{proxy+}",
+  "path": "/chatops",
+  "httpMethod": "POST",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "foo": "bar"
+  },
+  "pathParameters": {
+    "proxy": "/chatops"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  },
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Custom User Agent String",
+    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
+    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "requestTime": "09/Apr/2015:12:34:56 +0000",
+    "requestTimeEpoch": 1428582896000,
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "accessKey": null,
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Custom User Agent String",
+      "user": null
+    },
+    "path": "/chatops",
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "POST",
+    "apiId": "1234567890",
+    "protocol": "HTTP/1.1",
+    "userAgent": "Microsoft-SkypeBotApi (Microsoft-BotFramework/3.0)"
+  }
+}
