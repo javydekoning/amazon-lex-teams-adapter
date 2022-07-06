@@ -4,7 +4,8 @@ import logging
 import boto3
 import requests
 import urllib.parse
-from app.lib.lex_teams_adapter import LexTeamsAdapter, LexTeamsAdapterConfig
+#from app.lib.lex_teams_adapter import LexTeamsAdapter, LexTeamsAdapterConfig
+from lib.lex_teams_adapter import LexTeamsAdapter, LexTeamsAdapterConfig
 from botocore.exceptions import ClientError
 
 logger = logging.getLogger()
@@ -26,9 +27,10 @@ def get_secret():
         get_secret_value_response = secmgrClient.get_secret_value(
             SecretId=secret_name
         )
+        return get_secret_value_response['SecretString']
     except ClientError as e:
         print("An error occurred:", e)
-    return get_secret_value_response['SecretString']
+    
 
 
 def lambda_handler(event, context):
