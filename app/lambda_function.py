@@ -65,6 +65,7 @@ def lambda_handler(event, context):
             teamsChannelId = body['channelData'].get('teamsChannelId', None)
 
         recipient = body["recipient"],
+        recipient = recipient[0]
         replyToId = body["id"]
         logger.debug('lambda_handler: request.body.from.name = ' + userName)
         logger.debug(
