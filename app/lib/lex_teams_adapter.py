@@ -65,3 +65,8 @@ def event():
         data = file.read().replace('\n', '')
         body = json.loads(data)["body"]
     return body
+
+config = LexTeamsAdapterConfig.from_json(
+    '{"ms_app_id":"x", "client_secret":"x", "valid_tenant_ids":[ "x" ]}')
+app = LexTeamsAdapter.from_json(config=config, json_string=event())
+print(app)
